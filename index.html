@@ -1,0 +1,884 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calorie Tracker Project Roadmap</title>
+
+<style>
+:root {
+    --purple: #5946d2;
+    --dark: #211a58;
+    --light: #eeebff;
+    --background: #f4f6fb;
+    --text: #182033;
+    --muted: #657089;
+    --green: #16835f;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: var(--background);
+    color: var(--text);
+    line-height: 1.65;
+}
+
+button, input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.hero {
+    background: linear-gradient(135deg, #211a58, #5946d2);
+    color: white;
+    padding: 45px 20px 75px;
+}
+
+.hero-content {
+    max-width: 1000px;
+    margin: auto;
+}
+
+.tag {
+    display: inline-block;
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.3);
+    padding: 7px 13px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+h1 {
+    font-size: clamp(30px, 5vw, 48px);
+    line-height: 1.2;
+    margin: 20px 0 12px;
+}
+
+.hero p {
+    max-width: 700px;
+    color: #e4e0ff;
+}
+
+main {
+    max-width: 1000px;
+    margin: -35px auto 50px;
+    padding: 0 18px;
+}
+
+.progress-card {
+    background: white;
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 8px 25px #20204012;
+    margin-bottom: 30px;
+}
+
+.progress-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.progress-heading h2 {
+    font-size: 19px;
+    margin: 0;
+}
+
+#progressText {
+    color: var(--purple);
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+#progressMessage {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 8px 0 0;
+}
+
+.progress-bar {
+    height: 10px;
+    background: #e9eaf4;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 15px;
+}
+
+#progressFill {
+    width: 0%;
+    height: 100%;
+    background: var(--purple);
+    transition: width .3s;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.section-heading h2 {
+    margin: 0;
+}
+
+.section-heading p {
+    margin: 5px 0 0;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.reset-btn {
+    flex-shrink: 0;
+    background: white;
+    border: 1px solid #dce2ee;
+    border-radius: 8px;
+    padding: 9px 12px;
+}
+
+.reset-btn:hover,
+.toggle-btn:hover {
+    border-color: var(--purple);
+    color: var(--purple);
+}
+
+.roadmap {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.step {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 14px;
+    align-items: stretch;
+    min-width: 0;
+}
+
+.step-number {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 13px;
+    background: var(--light);
+    color: var(--purple);
+    font-weight: bold;
+    position: relative;
+    z-index: 1;
+}
+
+.step:not(:last-child) .step-number::after {
+    content: "";
+    position: absolute;
+    top: 48px;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    background: #dce2ee;
+    z-index: -1;
+}
+
+.step.done .step-number {
+    background: #e5f7ef;
+    color: var(--green);
+}
+
+.step-card {
+    min-width: 0;
+    background: white;
+    border: 1px solid #e3e7f0;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px #20204008;
+}
+
+.step-header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.step-title-wrap {
+    min-width: 0;
+    flex: 1;
+}
+
+.step-header h3 {
+    margin: 0;
+    font-size: 19px;
+    line-height: 1.4;
+}
+
+.topic {
+    display: inline-block;
+    margin-top: 8px;
+    background: var(--light);
+    color: #4938b1;
+    padding: 4px 9px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.description {
+    color: var(--muted);
+    margin: 10px 0 0;
+    font-size: 14px;
+}
+
+.toggle-btn {
+    flex-shrink: 0;
+    border: 1px solid #dce2ee;
+    background: white;
+    border-radius: 8px;
+    padding: 8px 11px;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.task-content {
+    border-top: 1px solid #edf0f6;
+    padding: 22px;
+    min-width: 0;
+}
+
+.task-intro {
+    font-weight: bold;
+    margin: 0 0 18px;
+}
+
+.instructions {
+    list-style: none;
+    counter-reset: instruction;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.instructions li {
+    counter-increment: instruction;
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
+    align-items: start;
+    min-width: 0;
+    line-height: 1.75;
+}
+
+.instructions li::before {
+    content: counter(instruction);
+    background: var(--light);
+    color: var(--purple);
+    width: 26px;
+    height: 26px;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 3px;
+}
+
+.instruction-text {
+    display: block;
+    min-width: 0;
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+
+code {
+    background: #f0eff7;
+    color: #4938a0;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: .9em;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+
+.expected {
+    margin-top: 22px;
+    background: #f7f8fc;
+    border: 1px solid #e5e8f1;
+    border-radius: 10px;
+    padding: 16px;
+    min-width: 0;
+}
+
+.expected strong {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 13px;
+    letter-spacing: .04em;
+}
+
+.expected pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: normal;
+    margin: 0;
+    color: #343c54;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.completion-note {
+    margin-top: 16px;
+    background: #eaf8f1;
+    color: #176448;
+    border-radius: 9px;
+    padding: 14px;
+    font-size: 14px;
+}
+
+.complete-row {
+    border-top: 1px solid #edf0f6;
+    background: #fcfcff;
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.complete-row label {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.complete-row input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--green);
+    flex-shrink: 0;
+}
+
+.status {
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--muted);
+    white-space: nowrap;
+}
+
+.done .status {
+    color: var(--green);
+}
+
+.final-card {
+    margin-top: 30px;
+    padding: 25px;
+    border-radius: 15px;
+    background: var(--dark);
+    color: white;
+}
+
+.final-card h2 {
+    margin-top: 0;
+}
+
+.final-card p {
+    color: #dedaff;
+    margin-bottom: 0;
+}
+
+footer {
+    text-align: center;
+    padding: 0 15px 25px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+@media (max-width: 600px) {
+    .hero {
+        padding: 35px 18px 65px;
+    }
+
+    main {
+        padding: 0 12px;
+    }
+
+    .step {
+        grid-template-columns: 35px minmax(0, 1fr);
+        gap: 8px;
+    }
+
+    .step-number {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        font-size: 13px;
+    }
+
+    .step:not(:last-child) .step-number::after {
+        top: 38px;
+        bottom: -45px;
+    }
+
+    .step-header {
+        padding: 15px;
+        gap: 8px;
+    }
+
+    .step-header h3 {
+        font-size: 16px;
+    }
+
+    .toggle-btn {
+        padding: 7px;
+        font-size: 12px;
+    }
+
+    .task-content {
+        padding: 15px;
+    }
+
+    .instructions li {
+        grid-template-columns: 25px minmax(0, 1fr);
+        gap: 8px;
+        margin-bottom: 14px;
+    }
+
+    .instructions li::before {
+        width: 24px;
+        height: 24px;
+    }
+
+    .complete-row {
+        padding: 12px 15px;
+        flex-wrap: wrap;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+    }
+
+    .progress-card {
+        padding: 17px;
+    }
+
+    .progress-heading {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="hero">
+    <div class="hero-content">
+        <span class="tag">🐍 PYTHON PROJECT · 8 CHECKPOINTS</span>
+
+        <h1>Build a Calorie Tracker App</h1>
+
+        <p>
+            Follow this step-by-step roadmap to build a working Python
+            application using Python basics, lists, dictionaries,
+            object-oriented programming, and file handling.
+        </p>
+    </div>
+</header>
+
+<main>
+    <section class="progress-card">
+        <div class="progress-heading">
+            <h2>Your project progress</h2>
+            <span id="progressText">0 / 8 complete</span>
+        </div>
+
+        <p id="progressMessage">
+            Start with Step 1 and mark each checkpoint complete when it works.
+        </p>
+
+        <div class="progress-bar">
+            <div id="progressFill"></div>
+        </div>
+    </section>
+
+    <div class="section-heading">
+        <div>
+            <h2>The Roadmap</h2>
+            <p>Open each step to see instructions and expected results.</p>
+        </div>
+
+        <button class="reset-btn" id="resetButton" type="button">
+            Reset progress
+        </button>
+    </div>
+
+    <section class="roadmap" id="roadmap"></section>
+
+    <section class="final-card">
+        <h2>🏁 Final Project Goal</h2>
+        <p>
+            Build a weekly calorie tracker that records food, calculates
+            daily and weekly totals, compares daily goals, and restores
+            saved records after restarting the application.
+        </p>
+    </section>
+</main>
+
+<footer>
+    Calorie Tracker App · Python Learning Roadmap
+</footer>
+
+<script>
+const checkpoints = [
+{
+    title: "Build the basic menu",
+    topic: "Python basics · print() and input()",
+    description: "Display the app menu and accept the user's choice.",
+    task: "Create a basic menu for the Weekly Calorie Tracker App.",
+    instructions: [
+        'Display the heading <code>"===== WEEKLY CALORIE TRACKER ====="</code> using <code>print()</code>.',
+        'Display <code>1. Add food</code>.',
+        'Display <code>2. View foods for a day</code>.',
+        'Display <code>3. View weekly summary</code>.',
+        'Display <code>4. Exit</code>.',
+        'Use <code>input()</code> to ask the user to enter a choice.',
+        'Store the choice in a variable named <code>choice</code>.',
+        'Display the choice entered by the user.',
+        'Run the program and test different choices.'
+    ],
+    expected: `===== WEEKLY CALORIE TRACKER =====
+1. Add food
+2. View foods for a day
+3. View weekly summary
+4. Exit
+Enter your choice: 1
+You selected: 1`,
+    output: "The menu displays correctly and accepts the user's choice."
+},
+{
+    title: "Make the menu repeat",
+    topic: "Loops and conditions",
+    description: "Allow multiple actions without restarting the program.",
+    task: "Update the menu so it keeps running until the user chooses Exit.",
+    instructions: [
+        'Place the menu inside a <code>while True</code> loop.',
+        'Use <code>input()</code> to accept the menu choice.',
+        'Use <code>if</code> to check whether the choice is <code>"1"</code>. Display <code>"Add food selected."</code>.',
+        'Use <code>elif</code> for <code>"2"</code> and display <code>"View foods for a day selected."</code>.',
+        'Use another <code>elif</code> for <code>"3"</code> and display <code>"Weekly summary selected."</code>.',
+        'For choice <code>"4"</code>, display a thank-you message and use <code>break</code>.',
+        'Use <code>else</code> to display <code>"Invalid choice."</code> for other inputs.',
+        'Test multiple choices before selecting Exit.'
+    ],
+    expected: "The menu reappears after each selection. Entering 4 exits the loop.",
+    output: "The menu repeats, handles invalid choices, and exits correctly."
+},
+{
+    title: "Create the FoodEntry class",
+    topic: "Class · object · constructor",
+    description: "Represent each food item with its own name and calorie count.",
+    task: "Create a class named FoodEntry.",
+    instructions: [
+        'Define a class named <code>FoodEntry</code>.',
+        'Add a constructor named <code>__init__()</code> that accepts <code>self</code>, <code>food_name</code>, and <code>calories</code>.',
+        'Store the food name in <code>self.food_name</code>.',
+        'Store the calories in <code>self.calories</code>.',
+        'Create <code>food1</code> for Oats with 150 calories.',
+        'Create <code>food2</code> for Banana with 105 calories.',
+        'Create <code>food3</code> for Eggs with 140 calories.',
+        'Display the name and calories of each object using its attributes.',
+        'Observe how each object stores its own information.'
+    ],
+    expected: `Oats - 150 calories
+Banana - 105 calories
+Eggs - 140 calories`,
+    output: "The student understands classes, constructors, attributes, and objects."
+},
+{
+    title: "Organize foods by day",
+    topic: "Lists and dictionaries",
+    description: "Store food records separately for each day of the week.",
+    task: "Create a weekly food-record structure.",
+    instructions: [
+        'Create a list named <code>days</code> containing Monday through Sunday.',
+        'Create a dictionary named <code>weekly_foods</code> with all seven days as keys and an empty list for each day.',
+        'Display the days with numbers starting from 1 using a loop.',
+        'Ask the user to select a day by entering its number.',
+        'Convert the selected day number to an integer and use it to select the matching day from <code>days</code>.',
+        'Ask the user for a food name and calorie count.',
+        'Create a <code>FoodEntry</code> object using the entered information.',
+        'Append the object to the selected day in <code>weekly_foods</code>.',
+        'Display the food records for the selected day.',
+        'Add food to two different days and check that the records remain separate.'
+    ],
+    expected: "Oats added to Monday remain separate from a banana added to Tuesday.",
+    output: "Foods are stored under the correct day in the dictionary."
+},
+{
+    title: "Calculate calorie totals",
+    topic: "Methods and loops",
+    description: "Calculate daily calories and the total for the entire week.",
+    task: "Update the app to calculate calorie totals.",
+    instructions: [
+        'Create a dictionary named <code>weekly_calories</code> with all seven days set to <code>0</code>.',
+        'When food is added, increase that day’s total by its calorie count.',
+        'Create <code>get_daily_calories(day)</code> to return the selected day’s total.',
+        'Create <code>get_weekly_calories()</code> and use a loop to add the totals for all seven days.',
+        'Create <code>show_foods(day)</code> to display each food and its calories.',
+        'Display the daily total at the end of <code>show_foods()</code>.',
+        'Create <code>show_summary()</code> to display all seven daily totals.',
+        'Display the weekly total after the daily totals.',
+        'Test Monday with Oats (150) and Banana (105), and Tuesday with Eggs (140).'
+    ],
+    expected: `Monday - 255 calories
+Tuesday - 140 calories
+Total calories for the week: 395`,
+    output: "Daily and weekly calorie totals are calculated correctly."
+},
+{
+    title: "Add encapsulation",
+    topic: "OOP · private attributes and methods",
+    description: "Create a CalorieTracker class that manages its own records.",
+    task: "Organize the existing functionality inside a class named CalorieTracker.",
+    instructions: [
+        'Create the <code>CalorieTracker</code> class and add an <code>__init__()</code> constructor.',
+        'Create private attribute <code>__weekly_foods</code> with seven days, each containing an empty list.',
+        'Create private attribute <code>__weekly_calories</code> with seven days, each set to <code>0</code>.',
+        'Create <code>add_food(day, food_name, calories)</code> to create a FoodEntry, store it, and update the daily total.',
+        'Create <code>show_foods(day)</code> to display a day’s foods and total.',
+        'Create <code>get_daily_calories(day)</code> to return the daily total.',
+        'Create <code>get_weekly_calories()</code> to calculate the weekly total.',
+        'Create <code>show_summary()</code> to display all daily totals.',
+        'Create a <code>tracker</code> object and add Oats (150) and Banana (105) to Monday.',
+        'Call <code>tracker.show_foods("Monday")</code> and <code>tracker.show_summary()</code>.',
+        'Use the class methods to manage the records rather than directly accessing private attributes.'
+    ],
+    expected: "The tracker object manages its own records and calorie totals through its methods.",
+    output: "The student understands encapsulation, private attributes, and instance methods."
+},
+{
+    title: "Add inheritance and method overriding",
+    topic: "OOP · inheritance · super() · overriding",
+    description: "Create a child class that adds daily-goal information to the summary.",
+    task: "Extend the app using inheritance and method overriding.",
+    instructions: [
+        'Create <code>WeeklyCalorieTracker</code> as a child of <code>CalorieTracker</code>.',
+        'Add a constructor named <code>__init__(self, daily_goal)</code>.',
+        'Call <code>super().__init__()</code> inside the child constructor.',
+        'Store the goal in <code>self.daily_goal</code>.',
+        'Define <code>show_summary()</code> in the child class using the same name as the parent method.',
+        'Display the heading <code>"===== WEEKLY SUMMARY ====="</code>.',
+        'Create a list of the seven days and use a loop to visit each day.',
+        'Get each day’s total by calling <code>self.get_daily_calories(day)</code>.',
+        'Use <code>if</code>, <code>elif</code>, and <code>else</code> to compare the total with <code>self.daily_goal</code>.',
+        'If below the goal, display remaining calories. If equal, display <code>"Daily goal reached!"</code>. Otherwise, display <code>"Daily goal exceeded."</code>.',
+        'Display the weekly total using <code>self.get_weekly_calories()</code>.',
+        'Ask the user for a daily goal and create a <code>WeeklyCalorieTracker</code> object.',
+        'Add foods and call <code>tracker.show_summary()</code>.',
+        'Observe that the child class runs its own version of <code>show_summary()</code>.'
+    ],
+    expected: "The summary shows each day's calories, compares them with the daily goal, and displays the weekly total.",
+    output: "The student understands inheritance, super(), and method overriding."
+},
+{
+    title: "Save and load data in a text file",
+    topic: "File handling · open · write · read · close",
+    description: "Save food records and restore them when the program restarts.",
+    task: "Add file handling using calorie_data.txt.",
+    instructions: [
+        'Inside <code>CalorieTracker</code>, create a method named <code>save_data()</code>.',
+        'Open <code>"calorie_data.txt"</code> in write mode using <code>open()</code>.',
+        'Loop through every day in <code>__weekly_foods</code> and every food stored for that day.',
+        'Write the day, food name, and calorie count separated by commas, with each record on a new line.',
+        'Convert calories to a string using <code>str()</code> and close the file using <code>close()</code>.',
+        'Call <code>self.save_data()</code> at the end of <code>add_food()</code>.',
+        'Create a method named <code>load_data()</code>.',
+        'Open the file in append mode (<code>"a"</code>) and close it to create the file if it does not exist.',
+        'Open the file in read mode (<code>"r"</code>) and loop through each line.',
+        'Use <code>strip()</code> and <code>split(",")</code> to separate the saved values.',
+        'Extract the day, food name, and calorie count. Convert the calorie count to an integer.',
+        'Create a <code>FoodEntry</code> object for each record, store it under the correct day, and update that day’s total.',
+        'Close the file after reading all records.',
+        'Call <code>self.load_data()</code> from the <code>CalorieTracker</code> constructor.',
+        'Run the app, add foods, and exit. Restart the app and verify that the saved records and totals return.'
+    ],
+    expected: "Previously saved foods and calorie totals appear again after restarting the program.",
+    output: "The student understands file modes, reading and writing, string conversion, and restoring saved records."
+}
+];
+
+/*
+  Escape HTML only when displaying plain text.
+  Task instructions intentionally contain <code> tags.
+*/
+function escapeHTML(text) {
+    return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+const roadmap = document.getElementById("roadmap");
+const progressText = document.getElementById("progressText");
+const progressMessage = document.getElementById("progressMessage");
+const progressFill = document.getElementById("progressFill");
+const resetButton = document.getElementById("resetButton");
+
+let completed = new Set();
+let expanded = new Set([0]);
+
+function renderRoadmap() {
+    roadmap.innerHTML = "";
+
+    checkpoints.forEach((step, index) => {
+        const isDone = completed.has(index);
+        const isExpanded = expanded.has(index);
+
+        const article = document.createElement("article");
+        article.className = "step" + (isDone ? " done" : "");
+
+        const instructionHTML = step.instructions
+            .map(item => `<li><span class="instruction-text">${item}</span></li>`)
+            .join("");
+
+        article.innerHTML = `
+            <div class="step-number">
+                ${isDone ? "✓" : index + 1}
+            </div>
+
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-title-wrap">
+                        <h3>Step ${index + 1} — ${step.title}</h3>
+                        <span class="topic">${step.topic}</span>
+                        <p class="description">${step.description}</p>
+                    </div>
+
+                    <button
+                        class="toggle-btn"
+                        type="button"
+                        aria-expanded="${isExpanded}"
+                    >
+                        ${isExpanded ? "Hide ▲" : "View task ↓"}
+                    </button>
+                </div>
+
+                <div class="task-content" ${isExpanded ? "" : "hidden"}>
+                    <p class="task-intro">${step.task}</p>
+
+                    <ol class="instructions">
+                        ${instructionHTML}
+                    </ol>
+
+                    <div class="expected">
+                        <strong>EXPECTED RESULT</strong>
+                        <pre>${escapeHTML(step.expected)}</pre>
+                    </div>
+
+                    <div class="completion-note">
+                        <strong>✓ Done when:</strong>
+                        ${step.output}
+                    </div>
+                </div>
+
+                <div class="complete-row">
+                    <label>
+                        <input
+                            type="checkbox"
+                            ${isDone ? "checked" : ""}
+                        >
+                        Mark checkpoint complete
+                    </label>
+
+                    <span class="status">
+                        ${isDone ? "COMPLETED" : "NOT COMPLETED"}
+                    </span>
+                </div>
+            </div>
+        `;
+
+        const toggleButton = article.querySelector(".toggle-btn");
+
+        toggleButton.addEventListener("click", () => {
+            if (expanded.has(index)) {
+                expanded.delete(index);
+            } else {
+                expanded.add(index);
+            }
+
+            renderRoadmap();
+        });
+
+        const checkbox = article.querySelector(
+            'input[type="checkbox"]'
+        );
+
+        checkbox.addEventListener("change", event => {
+            if (event.target.checked) {
+                completed.add(index);
+            } else {
+                completed.delete(index);
+            }
+
+            renderRoadmap();
+        });
+
+        roadmap.appendChild(article);
+    });
+
+    updateProgress();
+}
+
+function updateProgress() {
+    const count = completed.size;
+    const percentage = (count / checkpoints.length) * 100;
+
+    progressText.textContent =
+        `${count} / ${checkpoints.length} complete`;
+
+    progressFill.style.width = percentage + "%";
+
+    if (count === checkpoints.length) {
+        progressMessage.textContent =
+            "All checkpoints complete! You have finished the roadmap.";
+    } else if (count === 0) {
+        progressMessage.textContent =
+            "Start with Step 1 and mark each checkpoint complete when it works.";
+    } else {
+        progressMessage.textContent =
+            `${Math.round(percentage)}% complete. Keep building one checkpoint at a time.`;
+    }
+}
+
+resetButton.addEventListener("click", () => {
+    completed.clear();
+    expanded = new Set([0]);
+    renderRoadmap();
+});
+
+renderRoadmap();
+</script>
+
+</body>
+</html>
